@@ -42,7 +42,7 @@
                                         href="/administrativo/funcionarios/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
                 </a></li>
                 <li class="nav-item"><a class="nav-link disabled"
-                                         href="/administrativo/funcionarios/listar"> <i class="oi oi-spreadsheet"></i>
+                                        href="/administrativo/funcionarios/listar"> <i class="oi oi-spreadsheet"></i>
                     <span class="/administrativo">Listar </span>
                 </a></li>
             </ul>
@@ -77,11 +77,16 @@
                 <button class="btn btn-primary" type="button" data-toggle="collapse"
                         data-target="#collapseData" aria-controls="collapseData">Datas
                 </button>
-                <!--            <a class="btn btn-danger" type="button" data-toggle="collapse"-->
-                <!--                    th:href="@{/administrativo/funcionarios/remover}"-->
-                <!--                    data-target="#collapseData" aria-controls="collapseData"><span-->
-                <!--                    class="oi oi-warning" title="Remover" aria-hidden="true"></span>  Deletar todos os funcionários-->
-                <!--            </a>-->
+                <a class="btn btn-success" type="button" data-toggle="collapse"
+                   th:href="@{/administrativo/funcionarios/listar}"
+                   data-target="#collapseData" aria-controls="collapseData"><span
+                        class="oi oi-reload" title="Remover" aria-hidden="true"></span> Recarregar lista
+                </a>
+                <a class="btn btn-danger" type="button" data-toggle="collapse"
+                   th:href="@{/administrativo/funcionarios/remover}"
+                   data-target="#collapseData" aria-controls="collapseData"><span
+                        class="oi oi-warning" title="Remover" aria-hidden="true"></span> Deletar todos os funcionários
+                </a>
             </p>
             <div class="row">
                 <div class="col">
