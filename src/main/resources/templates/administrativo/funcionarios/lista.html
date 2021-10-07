@@ -134,22 +134,24 @@
                     </a>
                         <a class="btn btn-danger btn-sm" data-toggle="modal"
                            data-target="#modal-warning"
-                           th:href="@{/administrativo/funcionarios/remover/{id}(id=${funcionario.id})}"><span
-                                class="oi oi-trash" title="Remover" aria-hidden="true"></span></a>
-
+                           th:href="data-target='#modal-warning'+${funcionario.id}">
+                            <span class="oi oi-trash" title="Remover" aria-hidden="true">
+                            </span>
+                        </a>
+                        <!--todo - verificar modal-->
                         <div class="modal modal-warning fade in"
                              th:id="modal-warning+${funcionario.id}">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
+                                                aria-label="Fechar">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                         <h5 class="modal-title">Remover Funcionário</h5>
                                     </div>
                                     <div class="modal-body">
-                                        <h3>Deseja realmente remover o funcionário?</h3>
+                                        <h3>Essa ação não é reversível! Deseja realmente remover o funcionário?</h3>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline pull-left"

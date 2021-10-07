@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{administrativo/fragments/layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  layout:decorate="~{administrativo/fragments/layout}">
 <head>
     <title>Página Cadastro de Cidades da loja virtual</title>
 </head>
@@ -31,11 +33,11 @@
 							<div class="invalid-feedback"></div>
 						</div>
 						<div class="form-group col-md-6">
-							<label for="salario">Estado</label> 
+							<label for="estado">Estado</label>
 							
 							<select th:field="*{estado}"
 									class="form-control">
-									<option th:each="est: ${listaEstados}"
+									<option th:each="est: ${estadosList}"
 										th:value="${est.id}" th:text="${est.nome}"></option>
 								</select>
 							
