@@ -21,8 +21,8 @@ public class Funcionario {
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
     private String cargo;
-//    @ManyToOne
-//    private Cidade cidade;
+    @ManyToOne
+    private Cidade cidade;
     private String logradouro;
     private String numero;
     private String complemento;

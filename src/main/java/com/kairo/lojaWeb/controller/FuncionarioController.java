@@ -1,6 +1,7 @@
 package com.kairo.lojaWeb.controller;
 
 import com.kairo.lojaWeb.models.Funcionario;
+import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,10 +21,14 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private CidadeRepository cidadeRepository;
+
     @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView register(Funcionario funcionario) {
         ModelAndView mv = new ModelAndView("administrativo/funcionarios/cadastro");
         mv.addObject("funcionario", funcionario);
+        mv.addObject("cidadesList", cidadeRepository.findAll());
         return mv;
     }
 
