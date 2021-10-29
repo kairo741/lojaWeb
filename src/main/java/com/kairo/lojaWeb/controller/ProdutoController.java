@@ -5,14 +5,12 @@ import com.kairo.lojaWeb.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -59,6 +57,23 @@ public class ProdutoController {
         return list();
     }
 
+    @ResponseBody
+    @GetMapping("/administrativo/produtos/mostrarImagem/{imagem}")
+    public byte[] showImage(@PathVariable("imagem") String imagem) {
+        var filePath = new File(pathImage + imagem);
+
+        if (imagem != null || imagem.trim().length() > 0) {
+            try {
+                return Files.readAllBytes(filePath.toPath());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
     @PostMapping("/administrativo/produtos/salvar")
     public ModelAndView save(@Valid Produto produto, BindingResult result, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
@@ -70,8 +85,8 @@ public class ProdutoController {
             if (!file.isEmpty()) {
 
                 var bytes = file.getBytes();
-                var fileName = pathImage + produto.getId() + file.getOriginalFilename();
-                var path = Paths.get(fileName);
+                var fileName = produto.getId()+ "_" + file.getOriginalFilename();
+                var path = Paths.get(pathImage + fileName);
                 Files.write(path, bytes);
 
                 produto.setImageName(fileName);

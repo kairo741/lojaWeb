@@ -43,8 +43,8 @@
                     <td th:text="${produto.descricao}"></td>
                     <td th:text="${produto.quantidadeEstoque}"></td>
                     <td th:text="${produto.valorVenda}"></td>
-                    <!--                    <td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}"-->
-                    <!--                             width="100"/></td>-->
+                    <td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.imageName})}"
+                             width="100"/></td>
 
                     <td colspan="2"><a class="btn btn-info btn-sm"
                                        th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}"
