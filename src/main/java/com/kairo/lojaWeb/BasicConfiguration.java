@@ -34,14 +34,14 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(
                 "select email as username, senha as password, 1 as enable from funcionario where email=?"
         ).authoritiesByUsernameQuery(
-                "select funcionario.email as username, papel.nome as authority from permissoes inner join funcionario on funcionario.id=permissoes.funcionario_id inner join papel on permissoes.papel_id=papel.id where funcionario.email=?"
+                "select funcionario.email as username, papel.nome as authority from permissao inner join funcionario on funcionario.id=permissao.funcionario_id inner join papel on permissao.papel_id=papel.id where funcionario.email=?"
         ).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/administrativo/entrada/cadastro").permitAll()
-                .antMatchers("/administrativo/entrada/**").hasAnyRole("gerente").and()
+                .antMatchers("/administrativo/entrada/**").hasAuthority("gerente").and()
                 .formLogin()
                 .loginPage("/login").permitAll().and()
                 .logout()
