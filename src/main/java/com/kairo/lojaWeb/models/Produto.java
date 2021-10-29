@@ -19,5 +19,6 @@ public class Produto {
     private String categoria;
     private String marca;
     private Double quantidadeEstoque = 0.;
+    private String imageName;
 
 }
