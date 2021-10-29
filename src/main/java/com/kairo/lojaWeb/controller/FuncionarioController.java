@@ -4,6 +4,8 @@ import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,9 @@ public class FuncionarioController {
 
     @Autowired
     private CidadeRepository cidadeRepository;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView register(Funcionario funcionario) {
@@ -63,7 +68,8 @@ public class FuncionarioController {
         if (result.hasErrors()) {
             return register(funcionario);
         }
-//        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha())); todo - enriptar senha con o Secutiry
+//        funcionario.setSenha(encoder.encode(funcionario.getSenha())); // encoder do PasswordEncoder do Spring
+        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha())); // encrypt do BCrypt
         funcionarioRepository.save(funcionario);
         return list();
     }
