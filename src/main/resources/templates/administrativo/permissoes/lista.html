@@ -34,7 +34,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="permissao : ${listaPermissoes}">
+						<tr th:each="permissao : ${permissoesList}">
 							<td th:text="${permissao.id}"></td>
 							<td th:text="${permissao.funcionario.nome}"></td>
 							<td th:text="${permissao.papel.nome}"></td>

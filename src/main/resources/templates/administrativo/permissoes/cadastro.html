@@ -29,7 +29,7 @@
 							<label >Funcionário</label> 							
 							<select th:field="*{funcionario}"
 									class="form-control">
-									<option th:each="fun: ${listaFuncionarios}"
+									<option th:each="fun: ${funcionariosList}"
 										th:value="${fun.id}" th:text="${fun.nome}"></option>
 								</select>
 							
@@ -40,7 +40,7 @@
 							<label >Papel</label> 							
 							<select th:field="*{papel}"
 									class="form-control">
-									<option th:each="papel: ${listaPapeis}"
+									<option th:each="papel: ${papeisList}"
 										th:value="${papel.id}" th:text="${papel.nome}"></option>
 								</select>
 							
