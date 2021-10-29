@@ -17,7 +17,7 @@
 
 			<div class="col-lg-3">
 
-				<h1 class="my-4">Saldão</h1>
+				<h1 class="my-4">Bloons TD 6</h1>
 				<div class="list-group">
 					<a href="#" class="list-group-item">Category 1</a> <a href="#"
 						class="list-group-item">Category 2</a> <a href="#"
@@ -65,10 +65,10 @@
 				<div class="row">
 
 					<div class="col-lg-4 col-md-6 mb-4"
-						th:each="produto : ${listaProdutos}">
+						th:each="produto : ${produtosList}">
 						<div class="card h-100">
 							<a href="#"><img class="img-fluid"
-								th:src="@{/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" /></a>
+								th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.imageName})}" /></a>
 							<div class="card-body">
 								<h4 class="card-title">
 									<a href="#"><span th:text="${produto.descricao}"></span></a>

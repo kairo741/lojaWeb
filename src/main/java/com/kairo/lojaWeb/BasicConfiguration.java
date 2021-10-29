@@ -41,7 +41,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/administrativo/entrada/cadastro").permitAll()
-                .antMatchers("/administrativo/entrada/**").hasAuthority("gerente").and()
+                .antMatchers("/administrativo/entrada/**").hasAuthority("Gerente").and()
                 .formLogin()
                 .loginPage("/login").permitAll().and()
                 .logout()
