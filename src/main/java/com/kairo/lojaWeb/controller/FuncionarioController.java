@@ -3,6 +3,7 @@ package com.kairo.lojaWeb.controller;
 import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
+@Slf4j
 public class FuncionarioController {
 
     @Autowired
@@ -65,6 +67,11 @@ public class FuncionarioController {
 
     @PostMapping("/administrativo/funcionarios/salvar")
     public ModelAndView save(@Valid Funcionario funcionario, BindingResult result) {
+
+        if (result.getAllErrors().size() > 0) {
+            log.error(String.valueOf(result.getAllErrors()));
+        }
+
         if (result.hasErrors()) {
             return register(funcionario);
         }
