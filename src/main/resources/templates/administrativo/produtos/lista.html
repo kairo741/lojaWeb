@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{administrativo/fragments/layout}">
 <head>
+    <link rel="stylesheet" href="produtos.css">
     <title>Página lista de Produtos da loja virtual</title>
 </head>
 <body>
@@ -31,6 +32,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Nome</th>
                     <th>Descrição</th>
                     <th>Quantidade em Estoque</th>
                     <th>Valor de Venda</th>
@@ -41,6 +43,7 @@
                 <tr th:each="produto : ${produtosList}">
                     <td th:text="${produto.id}"></td>
                     <td th:text="${produto.descricao}"></td>
+                    <td width="50" th:text="${produto.produtoInfo}"></td>
                     <td th:text="${produto.quantidadeEstoque}"></td>
                     <td th:text="${produto.valorVenda}"></td>
                     <td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.imageName})}"

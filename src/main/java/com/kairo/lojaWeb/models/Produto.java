@@ -20,5 +20,7 @@ public class Produto {
     private String marca;
     private Double quantidadeEstoque = 0.;
     private String imageName;
+    @Column(name = "produtoInfo", length = 500, columnDefinition = "TEXT")
+    private String produtoInfo;
 
 }
