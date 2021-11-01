@@ -73,7 +73,7 @@
                      th:each="produto : ${produtosList}">
                     <div class="card h-100">
                         <a href="#"><img class="img-fluid"
-                                         th:src="@{/mostrarImagem/{imagem}(imagem=${produto.imageName})}"/></a>
+                                         th:src="@{/mostrarImagem/{imagem}(imagem=${produto.imageName})}" style="max-height: 200px; display: flex; margin: auto; padding-top: 5px"/></a>
                         <div class="card-body">
                             <h4 class="card-title">
                                 <a href="#"><span th:text="${produto.descricao}"></span></a>
@@ -81,7 +81,7 @@
                             <h5>
                                 R$ <span th:text="${produto.valorVenda}"></span>
                             </h5>
-                            <div class="description card-text" style="max-height: 200px; overflow: auto;">
+                            <div class="description card-text" style="max-height: 250px; overflow: auto;">
                                 <p><span class="description"
                                          th:text="${produto.produtoInfo}"></span></p>
                             </div>

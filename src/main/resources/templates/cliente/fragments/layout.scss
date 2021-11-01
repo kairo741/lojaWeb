@@ -1,0 +1,15 @@
+.bg-dark{
+    background-color: #2f7bc7!important;
+}
+
+@mixin bg-variant($parent, $color) {
+    #{$parent} {
+        background-color: #2f7bc7 !important;
+    }
+    a#{$parent},
+    button#{$parent} {
+        @include hover-focus {
+            background-color: darken($color, 10%) !important;
+        }
+    }
+}
