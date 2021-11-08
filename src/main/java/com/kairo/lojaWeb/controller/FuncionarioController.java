@@ -36,7 +36,7 @@ public class FuncionarioController {
 //    @Autowired
 //    private PasswordEncoder encoder;
 
-    private final FuncionarioService funcionarioService;
+    private final FuncionarioService service;
 
 
     @GetMapping("/administrativo/funcionarios/cadastrar")
@@ -83,6 +83,15 @@ public class FuncionarioController {
         if (result.hasErrors()) {
             return register(funcionario);
         }
+
+        //Validação do CPF
+
+        var isValid = service.validateCPF(funcionario.getCpf());
+        if (!isValid) {
+            result.rejectValue("cpf", "error.funcionario", "CPF inválido!");
+            return register(funcionario);
+        }
+
 //        funcionario.setSenha(encoder.encode(funcionario.getSenha())); // encoder do PasswordEncoder do Spring
         funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha())); // encrypt do BCrypt
         funcionarioRepository.save(funcionario);

@@ -14,6 +14,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
     public Boolean validateCPF(String cpf) {
         log.info("FuncionarioServiceImpl.validateCPF");
 
+        cpf = cpf.replace(".", "");
+        cpf = cpf.replace("-", "");
+
         return isCPF(cpf);
 
     }
