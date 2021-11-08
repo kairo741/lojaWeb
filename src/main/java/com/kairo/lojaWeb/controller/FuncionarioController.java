@@ -3,6 +3,8 @@ package com.kairo.lojaWeb.controller;
 import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
+import com.kairo.lojaWeb.services.funcionario.FuncionarioService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,12 +15,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
+@RestController
 @Slf4j
 public class FuncionarioController {
 
@@ -28,8 +33,11 @@ public class FuncionarioController {
     @Autowired
     private CidadeRepository cidadeRepository;
 
-    @Autowired
-    private PasswordEncoder encoder;
+//    @Autowired
+//    private PasswordEncoder encoder;
+
+    private final FuncionarioService funcionarioService;
+
 
     @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView register(Funcionario funcionario) {
