@@ -16,11 +16,13 @@ public class Produto {
 
     private String descricao;
     private Double valorVenda;
-    private String categoria;
-    private String marca;
     private Double quantidadeEstoque = 0.;
     private String imageName;
     @Column(name = "produtoInfo", length = 500, columnDefinition = "TEXT")
     private String produtoInfo;
+    @ManyToOne
+    Categoria categoria;
+    @ManyToOne
+    Marca marca;
 
 }

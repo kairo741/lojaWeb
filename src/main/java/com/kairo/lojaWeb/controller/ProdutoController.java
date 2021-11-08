@@ -1,7 +1,11 @@
 package com.kairo.lojaWeb.controller;
 
 import com.kairo.lojaWeb.models.Produto;
+import com.kairo.lojaWeb.repositories.CategoriaRepository;
+import com.kairo.lojaWeb.repositories.MarcaRepository;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -17,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.Optional;
 
 @Controller
+@RequiredArgsConstructor
+@Slf4j
 public class ProdutoController {
 
     private static String pathImage = "D:\\Usuário\\Documents\\IF 2021\\Desenv WEB\\imagens\\";
@@ -24,10 +30,15 @@ public class ProdutoController {
     @Autowired
     private ProdutoRepository produtoRepository;
 
+    private final MarcaRepository marcaRepository;
+    private final CategoriaRepository categoriaRepository;
+
     @GetMapping("/administrativo/produtos/cadastrar")
     public ModelAndView register(Produto produto) {
         ModelAndView mv = new ModelAndView("administrativo/produtos/cadastro");
         mv.addObject("produto", produto);
+        mv.addObject("marcasList", marcaRepository.findAll());
+        mv.addObject("categoriasList", categoriaRepository.findAll());
         return mv;
     }
 
@@ -85,7 +96,7 @@ public class ProdutoController {
             if (!file.isEmpty()) {
 
                 var bytes = file.getBytes();
-                var fileName = produto.getId()+ "_" + file.getOriginalFilename();
+                var fileName = produto.getId() + "_" + file.getOriginalFilename();
                 var path = Paths.get(pathImage + fileName);
                 Files.write(path, bytes);
 

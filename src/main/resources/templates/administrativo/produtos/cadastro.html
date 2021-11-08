@@ -35,20 +35,24 @@
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="categoria">Categoria</label> <input type="text"
-                                                                    class="form-control" id="categoria"
-                                                                    placeholder="Categoria"
-                                                                    data-mask-reverse="true" th:field="*{categoria}"
-                                                                    value=""/>
+                    <label>Categoria</label>
+                    <select th:field="*{categoria}"
+                            class="form-control" id="categoria">
+                        <option th:each="cat: ${categoriasList}"
+                                th:value="${cat.id}" th:text="${cat.nome}"></option>
+                    </select>
                     <div class="invalid-feedback"></div>
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="nome">Marca</label> <input type="text"
-                                                           class="form-control" id="marca" placeholder="Marca"
-                                                           autofocus="autofocus" th:field="*{marca}" value=""/>
+                    <label>Marca</label>
+                    <select th:field="*{marca}"
+                            class="form-control" id="marca">
+                        <option th:each="marca: ${marcasList}"
+                                th:value="${marca.id}" th:text="${marca.nome}"></option>
+                    </select>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group col-md-6">
