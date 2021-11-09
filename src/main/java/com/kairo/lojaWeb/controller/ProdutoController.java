@@ -18,7 +18,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequiredArgsConstructor
@@ -86,28 +89,31 @@ public class ProdutoController {
 
 
     @PostMapping("/administrativo/produtos/salvar")
-    public ModelAndView save(@Valid Produto produto, BindingResult result, @RequestParam("file") MultipartFile file) {
+    public ModelAndView save(@Valid Produto produto, BindingResult result, @RequestParam("file") List<MultipartFile> files) {
         if (result.hasErrors()) {
             return register(produto);
         }
         produtoRepository.save(produto);
 
-        try {
-            if (!file.isEmpty()) {
+        if (!files.isEmpty()) {
+            var imageList = new ArrayList<String>();
+            files.forEach(file -> {
+                try {
+                    String random = UUID.randomUUID().toString();
+                    var bytes = file.getBytes();
+                    var fileName = produto.getId() + "_" + random + "_" + file.getOriginalFilename();
+                    var path = Paths.get(pathImage + fileName);
+                    Files.write(path, bytes);
+                    imageList.add(fileName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                var bytes = file.getBytes();
-                var fileName = produto.getId() + "_" + file.getOriginalFilename();
-                var path = Paths.get(pathImage + fileName);
-                Files.write(path, bytes);
-
-                produto.setImageName(fileName);
-                produtoRepository.save(produto);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            });
+            produto.setImageName(imageList.get(0));
+            produto.setPhotos(imageList);
+            produtoRepository.save(produto);
         }
-
         return list();
     }
 

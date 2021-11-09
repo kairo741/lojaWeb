@@ -3,6 +3,7 @@ package com.kairo.lojaWeb.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "produto")
@@ -24,5 +25,9 @@ public class Produto {
     Categoria categoria;
     @ManyToOne
     Marca marca;
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "produto_photos")
+    @Column(name = "photos") // Column name in produto_photos
+    private List<String> photos;
 
 }
