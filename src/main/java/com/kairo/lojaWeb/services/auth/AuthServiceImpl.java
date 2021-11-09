@@ -1,12 +1,13 @@
 package com.kairo.lojaWeb.services.auth;
 
-import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.dto.MailDTO;
+import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
 import com.kairo.lojaWeb.services.email.EmailSenderService;
 import com.kairo.lojaWeb.util.Util;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,20 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
+    @Override
+    public void newPassword(String email, String newPassword) throws Exception {
+        log.info("AuthServiceImpl.newPassword");
+        var funcionarioOptional = funcionarioRepository.findByEmail(email);
+
+        if (funcionarioOptional.isPresent()) {
+            var funcionario = funcionarioOptional.get();
+            funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha())); // encrypt do BCrypt
+            funcionarioRepository.save(funcionario);
+        } else {
+            throw new Exception("Funcionário não encontrado!");
+        }
+    }
+
     private String sendEmail(Funcionario funcionario) throws Exception {
         log.info("START... Sending email");
 
@@ -68,8 +83,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public boolean validateCode(Funcionario funcionario, String code) {
-        return false;
-    }
+    public boolean validateCode(String email, String code) throws Exception {
+        var funcionarioOptional = funcionarioRepository.findByEmail(email);
 
+        if (funcionarioOptional.isPresent()) {
+            var funcionario = funcionarioOptional.get();
+
+            /**
+             * Primeiro parâmetro: Código em String
+             * Segundo parâmetro: Código vindo do banco encriptado
+             */
+            return encoder.matches(code, funcionario.getVerificationCode());
+        } else {
+            throw new Exception("Funcionário não encontrado!");
+        }
+    }
 }
