@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
 
         if (funcionarioOptional.isPresent()) {
             var funcionario = funcionarioOptional.get();
-            funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha())); // encrypt do BCrypt
+            funcionario.setSenha(new BCryptPasswordEncoder().encode(newPassword)); // encrypt do BCrypt
             funcionarioRepository.save(funcionario);
         } else {
             throw new Exception("Funcionário não encontrado!");
