@@ -1,4 +1,4 @@
-package com.kairo.lojaWeb.utils;
+package com.kairo.lojaWeb.util;
 
 public class Constants {
 

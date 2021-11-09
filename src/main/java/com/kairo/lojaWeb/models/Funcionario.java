@@ -31,5 +31,5 @@ public class Funcionario {
     private String cep;
     private String email;
     private String senha;
-
+    private String verificationCode;
 }

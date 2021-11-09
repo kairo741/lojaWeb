@@ -7,7 +7,7 @@ import com.kairo.lojaWeb.repositories.EntradaItensRepository;
 import com.kairo.lojaWeb.repositories.EntradaProdutoRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
-import com.kairo.lojaWeb.utils.Constants;
+import com.kairo.lojaWeb.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
