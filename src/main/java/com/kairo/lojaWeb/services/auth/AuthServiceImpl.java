@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
 
         if (funcionarioOptional.isPresent()) {
             var funcionario = funcionarioOptional.get();
-            var code = sendEmail(funcionario);
+            var code = sendEmail(funcionario, Util.getRandomNumberString());
 
             funcionario.setVerificationCode(code);
 
@@ -55,7 +55,14 @@ public class AuthServiceImpl implements AuthService {
         }
     }
 
-    private String sendEmail(Funcionario funcionario) throws Exception {
+    @Override
+    public void sendEmailPassword(Funcionario funcionario, String password) throws Exception {
+
+        sendEmail(funcionario, password);
+
+    }
+
+    private String sendEmail(Funcionario funcionario, String code) throws Exception {
         log.info("START... Sending email");
 
         try {
@@ -65,7 +72,6 @@ public class AuthServiceImpl implements AuthService {
                     .build();
 
             // Gero um código aleatório
-            var code = Util.getRandomNumberString();
 
 
             Map<String, Object> model = new HashMap<>();

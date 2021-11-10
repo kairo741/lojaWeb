@@ -9,4 +9,6 @@ public interface AuthService {
     boolean sendEmailCode(String email) throws Exception;
 
     void newPassword(String email, String newPassword) throws Exception;
+
+    void sendEmailPassword(Funcionario funcionario, String password) throws Exception;
 }

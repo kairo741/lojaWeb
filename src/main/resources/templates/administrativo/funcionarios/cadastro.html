@@ -128,24 +128,26 @@
             </div>
 
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                     <label for="email">Email</label> <input type="email"
                                                             class="form-control" id="email" name="email"
                                                             th:field="*{email}" value=""/>
                     <div class="invalid-feedback"></div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="senha">Senha</label> <input type="password"
-                                                            class="form-control" id="senha" name="senha"
-                                                            value=""/>
-                    <div class="invalid-feedback"></div>
-                </div>
+                <!--                <div class="form-group col-md-6">-->
+                <!--                    <label for="senha">Senha</label> <input type="password"-->
+                <!--                                                            class="form-control" id="senha" name="senha"-->
+                <!--                                                            value=""/>-->
+                <!--                    <div class="invalid-feedback"></div>-->
+                <!--                </div>-->
             </div>
+            A senha será enviada para o e-mail
 
             <input type="hidden" id="id" th:field="*{id}" value=""/>
-            <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            <button type="submit" class="btn btn-primary btn-sm" style="float: right;">Salvar</button>
         </form>
     </div>
+    <h4 th:if="${error}" class="alert-danger" th:text="${error}"></h4>
 </section>
 
 
