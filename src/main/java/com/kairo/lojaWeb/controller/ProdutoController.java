@@ -1,9 +1,11 @@
 package com.kairo.lojaWeb.controller;
 
+import com.kairo.lojaWeb.filter.FilterProduto;
 import com.kairo.lojaWeb.models.Produto;
 import com.kairo.lojaWeb.repositories.CategoriaRepository;
 import com.kairo.lojaWeb.repositories.MarcaRepository;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
+import com.kairo.lojaWeb.services.produto.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,7 @@ public class ProdutoController {
 
     private final MarcaRepository marcaRepository;
     private final CategoriaRepository categoriaRepository;
+    private final ProdutoService produtoService;
 
     @GetMapping("/administrativo/produtos/cadastrar")
     public ModelAndView register(Produto produto) {
@@ -46,8 +49,32 @@ public class ProdutoController {
     public ModelAndView list() {
         ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
         mv.addObject("produtosList", produtoRepository.findAll());
+        mv.addObject("marcasList", marcaRepository.findAll());
+        mv.addObject("categoriasList", categoriaRepository.findAll());
+        mv.addObject("filter", new FilterProduto());
         return mv;
     }
+
+    @GetMapping("/administrativo/produtos/listar/filter-by")
+    public ModelAndView listFilterBy(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String marca,
+            @RequestParam(required = false) String categoria) {
+        ModelAndView mv = new ModelAndView("administrativo/produtos/lista");
+
+        var filter = FilterProduto.builder()
+                .nome(nome)
+                .marca(marca)
+                .categoria(categoria)
+                .build();
+
+        mv.addObject("marcasList", marcaRepository.findAll());
+        mv.addObject("categoriasList", categoriaRepository.findAll());
+        mv.addObject("produtosList", produtoService.findByFilter(filter));
+        mv.addObject("filter", new FilterProduto());
+        return mv;
+    }
+
 
     @GetMapping("/administrativo/produtos/editar/{id}")
     public ModelAndView edit(@PathVariable("id") Long id) {
