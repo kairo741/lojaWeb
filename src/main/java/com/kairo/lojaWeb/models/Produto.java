@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
@@ -30,5 +31,9 @@ public class Produto {
     Categoria categoria;
     @ManyToOne
     Marca marca;
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "produto_photos")
+    @Column(name = "photos") // Column name in produto_photos
+    private List<String> photos;
 
 }
