@@ -41,7 +41,7 @@ public class BasicConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests().antMatchers("/administrativo/entrada/cadastro", "/password-recovery").permitAll()
+        http.csrf().disable().authorizeRequests().antMatchers("/administrativo/entrada/cadastro", "/password-recovery", "/administrativo/produtos/cargo-insert").permitAll()
                 .antMatchers("/administrativo/entrada/**").hasAuthority(Constants.CARGO_GERENTE).and()
                 .formLogin()
                 .loginPage("/login").permitAll().and()

@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Controller
@@ -110,5 +111,44 @@ public class ProdutoController {
 
         return list();
     }
+
+    @GetMapping("/administrativo/produtos/cargo-insert")
+    public ModelAndView cargoInsert() {
+
+        var marca = marcaRepository.findById(1L).get();
+        var categoria = categoriaRepository.findById(1L).get();
+
+        var arrayLength = 25000;
+        int total = arrayLength;
+
+        var produtosList = new ArrayList<Produto>();
+
+        while (arrayLength != 400000) {
+            log.info("Serão adicionados + " + arrayLength + " produtos.");
+            total += arrayLength;
+            for (int j = 0; j < arrayLength; j++) {
+                var produto = Produto.builder()
+                        .descricao("Product_" + j)
+                        .valorVenda(26.)
+                        .quantidadeEstoque(1.)
+                        .imageName("26_8fdf96e43a23492665d2a3d324904047.jpg")
+                        .produtoInfo("Product info")
+                        .categoria(categoria)
+                        .marca(marca)
+                        .build();
+                produtosList.add(produto);
+            }
+            produtoRepository.saveAllAndFlush(produtosList);
+            produtosList = new ArrayList<Produto>();
+            log.info("Adicionados " + arrayLength + " produtos.");
+            arrayLength = arrayLength * 2;
+
+        }
+        log.info("Finalizado, foram adicionados " + total + " produtos!");
+
+        return list();
+
+    }
+
 
 }
