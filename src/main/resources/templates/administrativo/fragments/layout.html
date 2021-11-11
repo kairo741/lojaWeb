@@ -19,16 +19,19 @@
     <link href="/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css"
           rel="stylesheet"/>
 
-    <!-- Custom styles for this template -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+            rel="stylesheet">
+
     <link href="/css/style.css" rel="stylesheet"/>
 </head>
 <body>
 <header>
     <nav
-            class="navbar navbar-inverse navbar navbar-dark bg-dark fixed-top">
+            class="navbar navbar-inverse navbar navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="btn btn-dark navbar-toggle pull-left">
+                <button type="button" class="btn btn-primary navbar-toggle pull-left">
                     <i class="oi oi-menu"></i>
                 </button>
                 <a class="navbar-brand " href="#">Painel Administrativo da Loja
@@ -41,125 +44,155 @@
 <div class="layout-main">
 
     <aside>
-        <nav class="sidebar sidebar-open" style="height: auto;">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link " href="/"> <i
-                        class="oi oi-home"></i> <span>Home</span>
-                </a></li>
-            </ul>
+        <!--        <nav class="sidebar sidebar-open">-->
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active bg-success">Entrada Produtos</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/entrada/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/entrada/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/">
+                    <i class="oi oi-home"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active bg-danger">Funcionários</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/funcionarios/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/funcionarios/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
+            </div>
 
-            </ul>
+            <!-- Nav Item - Funcionários -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFuncionarios"
+                   aria-expanded="true" aria-controls="collapseFuncionarios">
+                    <i class="oi oi-fw oi-person"></i>
+                    <span>Funcionários</span>
+                </a>
+                <div id="collapseFuncionarios" class="collapse" aria-labelledby="headingFuncionarios"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Telas para Funcionários:</h6>
+                        <a class="collapse-item" href="/administrativo/funcionarios/cadastrar">Cadastrar</a>
+                        <a class="collapse-item" href="/administrativo/funcionarios/listar">Listar</a>
+                    </div>
+                </div>
+            </li>
 
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active bg-warning">Papeis</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/papeis/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/papeis/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
+            <!-- Nav Item - Produtos -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProdutos"
+                   aria-expanded="true" aria-controls="collapseProdutos">
+                    <i class="oi oi-fw oi-dollar"></i>
+                    <span>Produtos</span>
+                </a>
+                <div id="collapseProdutos" class="collapse" aria-labelledby="headingProdutos"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Telas para Produtos:</h6>
+                        <a class="collapse-item" href="/administrativo/produtos/cadastrar">Cadastrar</a>
+                        <a class="collapse-item" href="/administrativo/produtos/listar">Listar</a>
+                        <a class="collapse-item" href="/administrativo/produtos/listar">Cadastro em lote</a>
+                    </div>
+                </div>
+            </li>
 
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Permissões</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/permissoes/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/permissoes/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
-
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Estados</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/estados/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/estados/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
-
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Cidades</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/cidades/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/cidades/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
-
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Produtos</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/produtos/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/produtos/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
-
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Categorias</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/categorias/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/categorias/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
-
-            <ul class="nav nav-pills">
-                <li class="nav-item"><span class="nav-link active">Marcas</span></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/marcas/cadastrar"> <i
-                        class="oi oi-plus"></i> <span>Cadastrar </span>
-                </a></li>
-                <li class="nav-item"><a class="nav-link"
-                                        href="/administrativo/marcas/listar"> <i
-                        class="oi oi-spreadsheet"></i> <span>Listar </span>
-                </a></li>
-            </ul>
+            <!-- Nav Item - Categorias -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategorias"
+                   aria-expanded="true" aria-controls="collapseCategorias">
+                    <i class="oi oi-fw oi-book"></i>
+                    <span>Categorias</span>
+                </a>
+                <div id="collapseCategorias" class="collapse" aria-labelledby="headingCategorias"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Telas para Categorias:</h6>
+                        <a class="collapse-item" href="/administrativo/categorias/cadastrar">Cadastrar</a>
+                        <a class="collapse-item" href="/administrativo/categorias/listar">Listar</a>
+                    </div>
+                </div>
+            </li>
 
 
-        </nav>
+            <!-- Nav Item - Marcas -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMarcas"
+                   aria-expanded="true" aria-controls="collapseMarcas">
+                    <i class="oi oi-fw oi-star"></i>
+                    <span>Marcas</span>
+                </a>
+                <div id="collapseMarcas" class="collapse" aria-labelledby="headingMarcas"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Telas para Marcas:</h6>
+                        <a class="collapse-item" href="/administrativo/marcas/cadastrar">Cadastrar</a>
+                        <a class="collapse-item" href="/administrativo/marcas/listar">Listar</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Papeis e Permissões -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePapel"
+                   aria-expanded="true" aria-controls="collapsePapel">
+                    <i class="oi oi-fw oi-spreadsheet"></i>
+                    <span>Permissões</span>
+                </a>
+                <div id="collapsePapel" class="collapse" aria-labelledby="headingPapel"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Papeis e Permissões:</h6>
+                        <a class="collapse-item" href="/administrativo/permissoes/cadastrar">Cadastrar permissão</a>
+                        <a class="collapse-item" href="/administrativo/permissoes/listar">Listar permissões</a>
+                        <a class="collapse-item" href="/administrativo/papeis/cadastrar">Cadastrar papel</a>
+                        <a class="collapse-item" href="/administrativo/papeis/listar">Listar papel</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Nav Item - CEP -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCEP"
+                   aria-expanded="true" aria-controls="collapseCEP">
+                    <i class="oi oi-fw oi-signpost"></i>
+                    <span>CEP</span>
+                </a>
+                <div id="collapseCEP" class="collapse" aria-labelledby="headingCEP"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Cidades e Estados:</h6>
+                        <a class="collapse-item" href="/administrativo/cidades/cadastrar">Cadastrar cidades</a>
+                        <a class="collapse-item" href="/administrativo/cidades/listar">Listar cidades</a>
+                        <a class="collapse-item" href="/administrativo/estados/cadastrar">Cadastrar estados</a>
+                        <a class="collapse-item" href="/administrativo/estados/listar">Listar estados</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Nav Item - Entrada de produto -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEntradaProdutos"
+                   aria-expanded="true" aria-controls="collapseEntradaProdutos">
+                    <i class="oi oi-fw oi-transfer"></i>
+                    <span>Entrada Produtos</span>
+                </a>
+                <div id="collapseEntradaProdutos" class="collapse" aria-labelledby="headingEntradaProdutos"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Entrada de estoque:</h6>
+                        <a class="collapse-item" href="/administrativo/entrada/cadastrar">Cadastrar</a>
+                        <a class="collapse-item" href="/administrativo/entrada/listar">Listar</a>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+
+        <!--        </nav>-->
     </aside>
 
     <section class="layout-content" layout:fragment="corpo">
