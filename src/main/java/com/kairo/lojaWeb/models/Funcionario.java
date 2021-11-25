@@ -16,6 +16,7 @@ public class Funcionario {
 
     private String nome;
     private Double salarioBruto;
+    private String cpf;
     @Temporal(TemporalType.DATE)
     private Date dataEntrada;
     @Temporal(TemporalType.DATE)

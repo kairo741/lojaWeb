@@ -3,14 +3,12 @@ package com.kairo.lojaWeb.controller;
 import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
-import com.kairo.lojaWeb.services.auth.AuthService;
+import com.kairo.lojaWeb.services.funcionario.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,8 +30,11 @@ public class FuncionarioController {
     @Autowired
     private CidadeRepository cidadeRepository;
 
-    @Autowired
-    private PasswordEncoder encoder;
+//    @Autowired
+//    private PasswordEncoder encoder;
+
+    private final FuncionarioService service;
+
 
     private final AuthService authService;
 
@@ -82,6 +83,15 @@ public class FuncionarioController {
             return register(funcionario);
         }
         String randomPassword = UUID.randomUUID().toString();
+
+
+        //Validação do CPF
+
+        var isValid = service.validateCPF(funcionario.getCpf());
+        if (!isValid) {
+            result.rejectValue("cpf", "error.funcionario", "CPF inválido!");
+            return register(funcionario);
+        }
 
 //        funcionario.setSenha(encoder.encode(funcionario.getSenha())); // encoder do PasswordEncoder do Spring
         funcionario.setSenha(new BCryptPasswordEncoder().encode(randomPassword)); // encrypt do BCrypt
