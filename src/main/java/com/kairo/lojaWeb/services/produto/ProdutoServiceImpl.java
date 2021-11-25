@@ -19,9 +19,7 @@ public class ProdutoServiceImpl implements ProdutoService {
     @Override
     public List<Produto> findByFilter(FilterProduto filter) {
 
-        var produtosList = repository.findAllByCategoria_NomeAndDescricaoAndMarca_Nome(filter.getCategoria(), filter.getNome(), filter.getMarca());
-
-        return produtosList;
+        return repository.findAllByCategoria_NomeOrDescricaoOrMarca_Nome(filter.getCategoria(), filter.getNome(), filter.getMarca());
 
     }
 }
