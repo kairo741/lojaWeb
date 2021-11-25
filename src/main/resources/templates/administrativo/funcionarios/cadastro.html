@@ -156,13 +156,13 @@
                 <!--                    <div class="invalid-feedback"></div>-->
                 <!--                </div>-->
             </div>
+            <h5 th:if="${error}" class="alert-danger" th:text="${error}" style="color: red; background-color: white;"></h5>
             A senha será enviada para o e-mail
 
             <input type="hidden" id="id" th:field="*{id}" value=""/>
             <button type="submit" class="btn btn-primary btn-sm" style="float: right;">Salvar</button>
         </form>
     </div>
-    <h4 th:if="${error}" class="alert-danger" th:text="${error}"></h4>
 </section>
 
 

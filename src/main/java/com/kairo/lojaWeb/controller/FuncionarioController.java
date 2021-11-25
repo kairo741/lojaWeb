@@ -3,6 +3,7 @@ package com.kairo.lojaWeb.controller;
 import com.kairo.lojaWeb.models.Funcionario;
 import com.kairo.lojaWeb.repositories.CidadeRepository;
 import com.kairo.lojaWeb.repositories.FuncionarioRepository;
+import com.kairo.lojaWeb.services.auth.AuthService;
 import com.kairo.lojaWeb.services.funcionario.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -101,9 +102,10 @@ public class FuncionarioController {
             authService.sendEmailPassword(funcionarioEntity, randomPassword);
             return list();
         } catch (Exception e) {
+            funcionarioRepository.delete(funcionarioEntity);
             mv.addObject("funcionario", funcionario);
             mv.addObject("cidadesList", cidadeRepository.findAll());
-            mv.addObject("error", "Ocorreu um erro ao enviar o email!");
+            mv.addObject("error", "Ocorreu um erro ao enviar o email! Verifique se o e-mail está correto.");
         }
         return mv;
     }
