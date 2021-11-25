@@ -26,6 +26,79 @@
     </nav>
 
     <div class="container">
+        <p>
+            <i class="oi oi-magnifying-glass"></i><span></span>
+            <button class="btn btn-primary" type="button" data-toggle="collapse"
+                    data-target="#collapseFilter" aria-controls="collapseFilter">Buscar por filtro
+            </button>
+            <!--            <button class="btn btn-primary" type="button" data-toggle="collapse"-->
+            <!--                    data-target="#collapseCategoria" aria-controls="collapseCategoria">Categoria-->
+            <!--            </button>-->
+            <!--            <button class="btn btn-primary" type="button" data-toggle="collapse"-->
+            <!--                    data-target="#collapseMarca" aria-controls="collapseMarca">Marca-->
+            <!--            </button>-->
+        </p>
+
+        <form th:action="@{/administrativo/produtos/listar/filter-by(categoria='kairo',marca='kairo',nome='kairo')}"
+              enctype="multipart/form-data" th:object="${filter}"
+              method="GET">
+            <div class="collapse" id="collapseFilter">
+                <div class="form-row">
+                    <div class="col-md-3">
+                        <!--                        <div class="collapse" id="collapseNome">-->
+                        <nav class="navbar navbar-light bg-light">
+                            <div class="form-inline">
+                                <input class="form-control mr-sm-2" type="search"
+                                       placeholder="nome" aria-label="Search" name="nome" th:field="*{nome}"
+                                       th:value="*{nome}"/>
+                                <!--                                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">Buscar</button>-->
+                            </div>
+                        </nav>
+
+                    </div>
+                    <!--                </div>-->
+                    <div class="col-md-3">
+                        <!--                        <div class="collapse" id="collapseCategoria">-->
+                        <nav class="navbar navbar-light bg-light">
+                            <div class="form-inline">
+                                <select th:field="*{categoria}" th:value="*{categoria}" name="categoria"
+                                        class="form-control mr-sm-2"
+                                        id="categoria"
+                                        aria-label="Search">
+                                    <option th:each="categoria: ${categoriasList}"
+                                            th:value="${categoria.nome}" th:text="${categoria.nome}"></option>
+                                </select>
+                                <!--                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>-->
+                            </div>
+                        </nav>
+                        <!--                        </div>-->
+                    </div>
+                    <div class="col-md-3">
+                        <!--                        <div class="collapse" id="collapseMarca">-->
+                        <nav class="navbar navbar-light bg-light">
+                            <div class="form-inline">
+                                <select th:field="*{marca}" name="marca" class="form-control mr-sm-2" id="marca"
+                                        aria-label="Search">
+                                    <option th:each="marca: ${marcasList}"
+                                            th:value="${marca.nome}" th:text="${marca.nome}"></option>
+                                </select>
+                                <!--                                <button class="btn btn-outline-success my-2 my-sm-0">Buscar</button>-->
+                            </div>
+                        </nav>
+                        <!--                        </div>-->
+                    </div>
+
+                    <div class="form-row p-2">
+                        <div class="form-inline">
+                            <button th:action="@{/administrativo/produtos/listar/filter-by(categoria=filter.categoria,marca=filter.marca,nome=filter.nome)}"
+                                    class="btn btn-outline-success my-2 my-sm-0">Buscar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
 
         <div class="table-responsive">
             <table class="table table-striped table-hover table-sm">
