@@ -30,19 +30,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="item : ${listaItens}">
-                        <td><img src="https://dummyimage.com/50x50/55595c/fff" />
+                    <tr th:each="item : ${itemList}">
+                        <td><img src="https://dummyimage.com/50x50/55595c/fff"/>
                         </td>
                         <td th:text="${item.produto.descricao}"></td>
                         <td>Em estoque</td>
                         <td><span th:text="${item.quantidade}"></span> &nbsp;&nbsp;
 
+
+                            <a class="btn btn-sm btn-success"
+                               th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}"
+                               role="button"><i class="oi oi-fw oi-minus"></i></a>
                             <a class="btn btn-sm btn-success"
                                th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${1})}"
-                               role="button"><i class="fa fa-plus"></i></a> &nbsp;&nbsp; <a
-                                    class="btn btn-sm btn-success"
-                                    th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}"
-                                    role="button"><i class="fa fa-minus"></i></a></td>
+                               role="button"><i class="oi oi-fw oi-plus"></i></a> &nbsp;&nbsp;
+                        </td>
 
                         <td class="text-right" th:text="${item.valorUnitario}"></td>
                         <td class="text-right" th:text="${item.valorTotal}"></td>
@@ -58,7 +60,7 @@
                         <td></td>
                         <td></td>
                         <td>Sub-Total</td>
-                        <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>
+                        <!--                        <td class="text-right"><span th:text="${compra.valorTotal}"></span></td>-->
                     </tr>
                     <tr>
                         <td></td>
@@ -76,8 +78,8 @@
                         <td></td>
                         <td></td>
                         <td><strong>Total</strong></td>
-                        <td class="text-right"><strong><span
-                                th:text="${compra.valorTotal}"></span></strong></td>
+                        <!--                        <td class="text-right"><strong><span-->
+                        <!--                                th:text="${compra.valorTotal}"></span></strong></td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -88,7 +90,8 @@
             <div class="row">
                 <div class="col-sm-12  col-md-6">
                     <button class="btn btn-block btn-light">Continue
-                        Comprando</button>
+                        Comprando
+                    </button>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
                     <a class="btn btn-lg btn-block btn-success text-uppercase"

@@ -28,6 +28,7 @@ public class ItensCompra {
 
     private Long quantidade;
     private Double valorUnitario;
+    private Double valorTotal;
 
 
 }
