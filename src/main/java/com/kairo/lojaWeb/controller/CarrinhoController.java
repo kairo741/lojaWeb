@@ -39,13 +39,7 @@ public class CarrinhoController {
         log.debug("Id do produto: {}", id);
         Optional<Produto> opProduto = produtoRepository.findById(id);
 
-        if (itensCompras.stream().anyMatch(item -> Objects.equals(item.getProduto().getId(), opProduto.get().getId()))) {
-            var itemCompra = itensCompras.stream()
-                    .filter(item -> Objects.equals(item.getProduto().getId(), opProduto.get().getId()))
-                    .findFirst().orElse(null);
-            assert itemCompra != null;
-            itemCompra.setQuantidade(itemCompra.getQuantidade() + 1);
-        } else {
+        if (!subtractOrAddProduct(opProduto.get().getId(), "ADD")) {
             var item = ItensCompra.builder()
                     .produto(opProduto.get())
                     .valorUnitario(opProduto.get().getValorVenda())
@@ -56,6 +50,31 @@ public class CarrinhoController {
 
         mv.addObject("itemList", itensCompras);
         return mv;
+    }
+
+    @GetMapping("/changeQuantity/{id}/{actionType}")
+    public ModelAndView changeQuantity(@PathVariable Long id, @PathVariable String actionType) {
+        var mv = new ModelAndView("cliente/carrinho");
+        subtractOrAddProduct(id, actionType.toUpperCase());
+        mv.addObject("itemList", itensCompras);
+        return mv;
+    }
+
+    private Boolean subtractOrAddProduct(Long idProduto, String actionType) {
+        if (itensCompras.stream().anyMatch(item -> Objects.equals(item.getProduto().getId(), idProduto))) {
+            var itemCompra = itensCompras.stream()
+                    .filter(item -> Objects.equals(item.getProduto().getId(), idProduto))
+                    .findFirst().orElse(null);
+            assert itemCompra != null;
+            if (actionType.equals("ADD")) {
+                itemCompra.setQuantidade(itemCompra.getQuantidade() + 1);
+            } else if(actionType.equals("SUB")){
+                itemCompra.setQuantidade(itemCompra.getQuantidade() - 1);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

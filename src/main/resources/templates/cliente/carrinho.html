@@ -39,10 +39,10 @@
 
 
                             <a class="btn btn-sm btn-success"
-                               th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${0})}"
+                               th:href="@{/changeQuantity/{id}/{actionType}(id=${item.produto.id},actionType=${'SUB'})}"
                                role="button"><i class="oi oi-fw oi-minus"></i></a>
                             <a class="btn btn-sm btn-success"
-                               th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id},acao=${1})}"
+                               th:href="@{/changeQuantity/{id}/{actionType}(id=${item.produto.id},actionType=${'ADD'})}"
                                role="button"><i class="oi oi-fw oi-plus"></i></a> &nbsp;&nbsp;
                         </td>
 
