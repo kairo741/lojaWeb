@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -38,12 +39,21 @@ public class CarrinhoController {
         log.debug("Id do produto: {}", id);
         Optional<Produto> opProduto = produtoRepository.findById(id);
 
-        var item = ItensCompra.builder()
-                .produto(opProduto.get())
-                .valorUnitario(opProduto.get().getValorVenda())
-                .build();
-        item.setQuantidade((item.getQuantidade() != null ? item.getQuantidade() : 0) + 1);
-        itensCompras.add(item);
+        if (itensCompras.stream().anyMatch(item -> Objects.equals(item.getProduto().getId(), opProduto.get().getId()))) {
+            var itemCompra = itensCompras.stream()
+                    .filter(item -> Objects.equals(item.getProduto().getId(), opProduto.get().getId()))
+                    .findFirst().orElse(null);
+            assert itemCompra != null;
+            itemCompra.setQuantidade(itemCompra.getQuantidade() + 1);
+        } else {
+            var item = ItensCompra.builder()
+                    .produto(opProduto.get())
+                    .valorUnitario(opProduto.get().getValorVenda())
+                    .build();
+            item.setQuantidade((item.getQuantidade() != null ? item.getQuantidade() : 0) + 1);
+            itensCompras.add(item);
+        }
+
 
         mv.addObject("itemList", itensCompras);
 
