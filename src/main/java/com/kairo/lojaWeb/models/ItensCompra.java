@@ -27,8 +27,8 @@ public class ItensCompra {
     private Compra compra;
 
     private Long quantidade;
-    private Double valorUnitario;
-    private Double valorTotal;
+    private Double valorUnitario = 0.;
+    private Double valorTotal = 0.;
 
 
 }

@@ -1,5 +1,6 @@
 package com.kairo.lojaWeb.controller;
 
+import com.kairo.lojaWeb.models.Compra;
 import com.kairo.lojaWeb.models.ItensCompra;
 import com.kairo.lojaWeb.models.Produto;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,11 +25,14 @@ public class CarrinhoController {
     private final List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
 
     private final ProdutoRepository produtoRepository;
+    private final Compra compra = new Compra();
 
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho() {
         var mv = new ModelAndView("cliente/carrinho");
+        calculateFinalPrice();
+        mv.addObject("compra", compra);
         mv.addObject("itemList", itensCompras);
         return mv;
     }
@@ -38,11 +43,13 @@ public class CarrinhoController {
         Optional<Produto> opProduto = produtoRepository.findById(id);
 
         if (!subtractOrAddProduct(opProduto.get().getId(), "ADD")) {
+            var produto = opProduto.get();
             var item = ItensCompra.builder()
-                    .produto(opProduto.get())
-                    .valorUnitario(opProduto.get().getValorVenda())
+                    .produto(produto)
+                    .valorUnitario(produto.getValorVenda())
                     .build();
             item.setQuantidade((item.getQuantidade() != null ? item.getQuantidade() : 0) + 1);
+            item.setValorTotal(produto.getValorVenda() * item.getQuantidade());
             itensCompras.add(item);
         }
 
@@ -68,6 +75,7 @@ public class CarrinhoController {
                     .filter(item -> Objects.equals(item.getProduto().getId(), idProduto))
                     .findFirst().orElse(null);
             assert itemCompra != null;
+            var produto = itemCompra.getProduto();
             if (actionType.equals("ADD")) {
                 itemCompra.setQuantidade(itemCompra.getQuantidade() + 1);
             } else if (actionType.equals("SUB")) {
@@ -75,12 +83,20 @@ public class CarrinhoController {
                     itemCompra.setQuantidade(itemCompra.getQuantidade() - 1);
                 } else {
                     itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), idProduto));
+
                 }
             }
+            itemCompra.setValorTotal(produto.getValorVenda() * itemCompra.getQuantidade());
             return true;
         } else {
             return false;
         }
+    }
+
+    private void calculateFinalPrice() {
+        AtomicReference<Double> finalPrice = new AtomicReference<>(0.);
+        itensCompras.forEach(itensCompra -> finalPrice.updateAndGet(v -> v + itensCompra.getValorTotal()));
+        compra.setValorTotal(finalPrice.get());
     }
 
 }
