@@ -5,6 +5,8 @@ import com.kairo.lojaWeb.models.Compra;
 import com.kairo.lojaWeb.models.ItensCompra;
 import com.kairo.lojaWeb.models.Produto;
 import com.kairo.lojaWeb.repositories.ClienteRepository;
+import com.kairo.lojaWeb.repositories.CompraRepository;
+import com.kairo.lojaWeb.repositories.ItensCompraRepository;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -27,10 +30,12 @@ import java.util.concurrent.atomic.AtomicReference;
 @Controller
 public class CarrinhoController {
 
+    private final CompraRepository compraRepository;
     private final ClienteRepository clienteRepository;
     private final ProdutoRepository produtoRepository;
-    private final List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
-    private final Compra compra = new Compra();
+    private final ItensCompraRepository itensCompraRepository;
+    private List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
+    private Compra compra = new Compra();
     private Cliente cliente = new Cliente();
 
     @GetMapping("/carrinho")
@@ -50,6 +55,22 @@ public class CarrinhoController {
         mv.addObject("compra", compra);
         mv.addObject("itemList", itensCompras);
         mv.addObject("cliente", cliente);
+        return mv;
+    }
+
+    @PostMapping("/payment/confirm")
+    public ModelAndView confirmPayment(String paymentForm) {
+        var mv = new ModelAndView("cliente/mensagemFinalizou");
+        compra.setCliente(cliente);
+        compra.setFormaPagamento(paymentForm);
+        compra = compraRepository.save(compra);
+
+        itensCompras.forEach(itensCompra -> {
+            itensCompra.setCompra(compra);
+        });
+
+        itensCompras = new ArrayList<>();
+        compra = new Compra();
         return mv;
     }
 

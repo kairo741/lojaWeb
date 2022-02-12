@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<title>Login</title>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{cliente/fragments/layout}">
 
+<head>
+    <title>Sucesso 🐵</title>
 </head>
 
 <body>
-	<h1>Compra Efetuada com sucesso</h1>
-	<a href="/">Voltar para a Página Inicial</a>
+<!-- Page Content -->
+<div class="container" layout:fragment="corpo">
+
+    <div class="row text-center justify-content-center">
+        <div class="col-sm-6 col-sm-offset-3"
+             style="display: flex; flex-direction: column; align-items: center;">
+            <br><br>
+            <h1 style="color:#0fad00">Sucesso!</h1>
+            <img src="https://www.pngkit.com/png/full/186-1862032_fan-arti-bloons-td-6.png">
+            <h3>Loja dos Mamacos agradece!</h3>
+            <p style="font-size:20px;color:#5C5C5C;">Compra efetuada com sucesso, muito obrigado!</p>
+            <a href="/" class="btn btn-sm btn-success" role="button">Voltar para Home</a>
+            <br><br>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
