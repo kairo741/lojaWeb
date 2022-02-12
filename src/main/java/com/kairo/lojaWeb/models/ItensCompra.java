@@ -25,10 +25,7 @@ public class ItensCompra {
 
     @ManyToOne
     private Compra compra;
-
     private Long quantidade;
     private Double valorUnitario = 0.;
     private Double valorTotal = 0.;
-
-
 }

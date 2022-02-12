@@ -13,9 +13,10 @@
 	<!-- Page Content -->
 	<div class="container" layout:fragment="corpo">
 
-		<div class="row">
+		<div class="row mt-2">
 			<div class="col-6">
-				<h2>Efetue seu cadastro na Loja dos Mamacos</h2>
+				<h2>Efetue seu cadastro na </h2>
+				<h2 class="font-weight-bold">Loja dos Mamacos</h2>
 			</div>
 			<div class="col-6">
 				<h2>Login</h2>
@@ -41,7 +42,7 @@
 					<div class="form-group col-md-6">
 						<label for="estado">Cidade</label> <select th:field="*{cidade}"
 							class="form-control">
-							<option th:each="cid: ${listaCidades}" th:value="${cid.id}"
+							<option th:each="cid: ${cidadeList}" th:value="${cid.id}"
 								th:text="${cid.nome}"></option>
 						</select>
 
