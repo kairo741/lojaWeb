@@ -23,14 +23,21 @@ import java.util.concurrent.atomic.AtomicReference;
 public class CarrinhoController {
 
     private final List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
-
     private final ProdutoRepository produtoRepository;
     private final Compra compra = new Compra();
-
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho() {
         var mv = new ModelAndView("cliente/carrinho");
+        calculateFinalPrice();
+        mv.addObject("compra", compra);
+        mv.addObject("itemList", itensCompras);
+        return mv;
+    }
+
+    @GetMapping("/payment")
+    public ModelAndView payment() {
+        var mv = new ModelAndView("cliente/finalizar");
         calculateFinalPrice();
         mv.addObject("compra", compra);
         mv.addObject("itemList", itensCompras);
@@ -68,7 +75,6 @@ public class CarrinhoController {
         return "redirect:/carrinho";
     }
 
-
     private Boolean subtractOrAddProduct(Long idProduto, String actionType) {
         if (itensCompras.stream().anyMatch(item -> Objects.equals(item.getProduto().getId(), idProduto))) {
             var itemCompra = itensCompras.stream()
@@ -83,7 +89,6 @@ public class CarrinhoController {
                     itemCompra.setQuantidade(itemCompra.getQuantidade() - 1);
                 } else {
                     itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), idProduto));
-
                 }
             }
             itemCompra.setValorTotal(produto.getValorVenda() * itemCompra.getQuantidade());
