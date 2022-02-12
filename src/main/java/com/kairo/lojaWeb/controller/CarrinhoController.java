@@ -54,9 +54,7 @@ public class CarrinhoController {
             itensCompras.add(item);
         }
 
-
         mv.addObject("itemList", itensCompras);
-
         return mv;
     }
 
