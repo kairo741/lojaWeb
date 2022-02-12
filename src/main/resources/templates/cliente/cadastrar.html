@@ -22,7 +22,7 @@
 				<h2>Login</h2>
 			</div>
 
-	<div class="col-6">
+	<div class="col-6 mb-2">
 			<form action="/cliente/salvar" th:object="${cliente}" method="POST">
 				<div class="form-row">
 					<div class="form-group col-md-12">
@@ -66,7 +66,7 @@
 				</div>
 
 				<input type="hidden" id="id" th:field="*{id}" value="" />
-				<button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+				<button type="submit" class="btn btn-primary btn-block">Cadastrar</button>
 			</form>
 </div>
 
