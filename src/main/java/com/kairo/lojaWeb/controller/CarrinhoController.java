@@ -1,11 +1,16 @@
 package com.kairo.lojaWeb.controller;
 
+import com.kairo.lojaWeb.models.Cliente;
 import com.kairo.lojaWeb.models.Compra;
 import com.kairo.lojaWeb.models.ItensCompra;
 import com.kairo.lojaWeb.models.Produto;
+import com.kairo.lojaWeb.repositories.ClienteRepository;
 import com.kairo.lojaWeb.repositories.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,9 +27,11 @@ import java.util.concurrent.atomic.AtomicReference;
 @Controller
 public class CarrinhoController {
 
-    private final List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
+    private final ClienteRepository clienteRepository;
     private final ProdutoRepository produtoRepository;
+    private final List<ItensCompra> itensCompras = new ArrayList<ItensCompra>();
     private final Compra compra = new Compra();
+    private Cliente cliente = new Cliente();
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho() {
@@ -37,10 +44,12 @@ public class CarrinhoController {
 
     @GetMapping("/payment")
     public ModelAndView payment() {
+        getAuthCliente();
         var mv = new ModelAndView("cliente/finalizar");
         calculateFinalPrice();
         mv.addObject("compra", compra);
         mv.addObject("itemList", itensCompras);
+        mv.addObject("cliente", cliente);
         return mv;
     }
 
@@ -73,6 +82,14 @@ public class CarrinhoController {
     public String removeProdutoCarrinho(@PathVariable Long id) {
         itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), id));
         return "redirect:/carrinho";
+    }
+
+    private void getAuthCliente() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            String email = auth.getName();
+            cliente = clienteRepository.findByEmail(email).orElseThrow(RuntimeException::new);
+        }
     }
 
     private Boolean subtractOrAddProduct(Long idProduto, String actionType) {
