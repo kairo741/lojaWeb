@@ -33,9 +33,7 @@ public class CarrinhoController {
     }
 
     @GetMapping("/addCarrinho/{id}")
-    public ModelAndView carrinho(@PathVariable Long id) {
-        var mv = new ModelAndView("cliente/carrinho");
-
+    public String carrinho(@PathVariable Long id) {
         log.debug("Id do produto: {}", id);
         Optional<Produto> opProduto = produtoRepository.findById(id);
 
@@ -48,26 +46,19 @@ public class CarrinhoController {
             itensCompras.add(item);
         }
 
-        mv.addObject("itemList", itensCompras);
-        return mv;
+        return "redirect:/carrinho";
     }
 
     @GetMapping("/changeQuantity/{id}/{actionType}")
-    public ModelAndView changeQuantity(@PathVariable Long id, @PathVariable String actionType) {
-        var mv = new ModelAndView("cliente/carrinho");
+    public String changeQuantity(@PathVariable Long id, @PathVariable String actionType) {
         subtractOrAddProduct(id, actionType.toUpperCase());
-        mv.addObject("itemList", itensCompras);
-        return mv;
+        return "redirect:/carrinho";
     }
 
     @GetMapping("/remove/{id}")
-    public ModelAndView removeProdutoCarrinho(@PathVariable Long id) {
-        var mv = new ModelAndView("cliente/carrinho");
-
+    public String removeProdutoCarrinho(@PathVariable Long id) {
         itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), id));
-
-        mv.addObject("itemList", itensCompras);
-        return mv;
+        return "redirect:/carrinho";
     }
 
 
