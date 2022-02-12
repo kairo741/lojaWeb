@@ -60,6 +60,17 @@ public class CarrinhoController {
         return mv;
     }
 
+    @GetMapping("/remove/{id}")
+    public ModelAndView removeProdutoCarrinho(@PathVariable Long id) {
+        var mv = new ModelAndView("cliente/carrinho");
+
+        itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), id));
+
+        mv.addObject("itemList", itensCompras);
+        return mv;
+    }
+
+
     private Boolean subtractOrAddProduct(Long idProduto, String actionType) {
         if (itensCompras.stream().anyMatch(item -> Objects.equals(item.getProduto().getId(), idProduto))) {
             var itemCompra = itensCompras.stream()
@@ -68,8 +79,12 @@ public class CarrinhoController {
             assert itemCompra != null;
             if (actionType.equals("ADD")) {
                 itemCompra.setQuantidade(itemCompra.getQuantidade() + 1);
-            } else if(actionType.equals("SUB")){
-                itemCompra.setQuantidade(itemCompra.getQuantidade() - 1);
+            } else if (actionType.equals("SUB")) {
+                if (itemCompra.getQuantidade() > 1) {
+                    itemCompra.setQuantidade(itemCompra.getQuantidade() - 1);
+                } else {
+                    itensCompras.removeIf(item -> Objects.equals(item.getProduto().getId(), idProduto));
+                }
             }
             return true;
         } else {

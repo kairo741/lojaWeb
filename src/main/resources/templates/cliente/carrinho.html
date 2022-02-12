@@ -49,7 +49,7 @@
                         <td class="text-right" th:text="${item.valorUnitario}"></td>
                         <td class="text-right" th:text="${item.valorTotal}"></td>
                         <td class="text-right"><a class="btn btn-sm btn-danger"
-                                                  th:href="@{/removerProduto/{id}(id=${item.produto.id})}"
+                                                  th:href="@{/remove/{id}(id=${item.produto.id})}"
                                                   role="button"><i class="oi oi-fw oi-trash"></i></a></td>
                     </tr>
 
