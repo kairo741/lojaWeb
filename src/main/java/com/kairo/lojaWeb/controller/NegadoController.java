@@ -10,7 +10,7 @@ public class NegadoController {
 
     @GetMapping("/negado")
     public ModelAndView register() {
-        ModelAndView mv = new ModelAndView("/negado");
+        ModelAndView mv = new ModelAndView("/negadoAdministrativo");
         return mv;
     }
 
