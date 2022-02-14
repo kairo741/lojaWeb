@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fddcd1ef-6e67-4ae1-ace0-0650e035c105">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LojaWeb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[
+SELECT compra.cliente_id, 
+compra.forma_pagamento, 
+compra.valor_total, 
+compra.data_compra, 
+cliente.nome 
+FROM compra 
+INNER JOIN cliente WHERE cliente.id  = compra.cliente_id]]>
+	</queryString>
+	<field name="cliente_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="cliente_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="cliente_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="compra"/>
+	</field>
+	<field name="forma_pagamento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="forma_pagamento"/>
+		<property name="com.jaspersoft.studio.field.label" value="forma_pagamento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="compra"/>
+	</field>
+	<field name="valor_total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="valor_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="valor_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="compra"/>
+	</field>
+	<field name="data_compra" class="java.time.LocalDateTime">
+		<property name="com.jaspersoft.studio.field.name" value="data_compra"/>
+		<property name="com.jaspersoft.studio.field.label" value="data_compra"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="compra"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="0" width="595" height="55" uuid="6f5819f8-62f9-418f-acb5-9fccc51dffa4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Compras]]></text>
+			</staticText>
+			<image>
+				<reportElement x="60" y="2" width="50" height="50" uuid="49aeab75-74f3-45c7-aa00-778700ef9820"/>
+				<imageExpression><![CDATA["https://www.pngkit.com/png/full/186-1862032_fan-arti-bloons-td-6.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="450" y="0" width="50" height="50" uuid="d0a286f0-b22b-43f4-9202-708560d8915f"/>
+				<imageExpression><![CDATA["https://www.pngkit.com/png/full/186-1862032_fan-arti-bloons-td-6.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="80" y="0" width="100" height="30" uuid="3ac6c074-5802-43d3-aacf-71383a0443ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fdfc29fd-18bc-4110-b336-8ea48445e1f5"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="100" height="30" uuid="65ba5b2d-5b03-4a73-bdea-bf6b32cc215e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e813377-e44e-4783-a85c-89985408f779"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Valor total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="100" height="30" uuid="7c7b506f-53c7-4c05-8eb0-e520160025a4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5fa48f19-a66b-46e6-bd68-605c3d428d27"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Forma de pagamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="0" width="100" height="30" uuid="4b2587ae-abba-4535-8019-bf7a3c63638b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="569cd688-e3ea-4cf5-a01d-5059bfac6e26"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Data da compra]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="0" width="100" height="30" uuid="d3b63b0a-877e-4c6e-a932-6804ad2b3393">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fdfc29fd-18bc-4110-b336-8ea48445e1f5"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="30" uuid="07ab69f9-22e8-4a2a-89e1-9bbbbab1171f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e813377-e44e-4783-a85c-89985408f779"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="30" uuid="7517c19e-97d8-49ec-82ae-26aca945a2c0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5fa48f19-a66b-46e6-bd68-605c3d428d27"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{forma_pagamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="100" height="30" uuid="87e73c5e-fe33-4f97-bcd9-815c0f503001">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="569cd688-e3ea-4cf5-a01d-5059bfac6e26"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data_compra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

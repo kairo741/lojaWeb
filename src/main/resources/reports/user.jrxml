@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e0a59865-7a2a-45c7-845e-1f02d913da41">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="LojaWeb"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="322"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="667"/>
+	<queryString>
+		<![CDATA[SELECT * FROM cliente]]>
+	</queryString>
+	<field name="id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="cpf"/>
+		<property name="com.jaspersoft.studio.field.label" value="cpf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="email" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="email"/>
+		<property name="com.jaspersoft.studio.field.label" value="email"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nome"/>
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="senha" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="senha"/>
+		<property name="com.jaspersoft.studio.field.label" value="senha"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="cidade_id" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="cidade_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="cidade_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<staticText>
+				<reportElement x="-20" y="0" width="595" height="55" uuid="62c36f1a-f198-4ea8-b7d0-c791a7abc694"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de usuários]]></text>
+			</staticText>
+			<image>
+				<reportElement x="60" y="2" width="50" height="50" uuid="cad4eb50-c82b-472a-b842-b8f0344ac404"/>
+				<imageExpression><![CDATA["https://www.pngkit.com/png/full/186-1862032_fan-arti-bloons-td-6.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="450" y="0" width="50" height="50" uuid="624c997a-3242-495a-b5ae-d7a0cfcaec27"/>
+				<imageExpression><![CDATA["https://www.pngkit.com/png/full/186-1862032_fan-arti-bloons-td-6.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="c716ca28-5f16-4e8a-99f2-2b60e1df7876">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16a9d3c1-5b07-4238-8e9d-b5e76824ed68"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="150" height="30" uuid="66f79532-1309-41ec-a834-8591615338b3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb456655-93a5-4f30-8e34-c5dce9fef10b"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="30" uuid="ddbf0149-de28-4d9a-a1ff-c87247eac826">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="828ed069-410d-45a8-acbb-0e9e4ac78d86"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="e8576a11-f07c-444f-96a0-19f9a15ed964">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16a9d3c1-5b07-4238-8e9d-b5e76824ed68"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="150" height="30" uuid="eaf91902-3730-4434-bc4d-3ad159d3d704">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb456655-93a5-4f30-8e34-c5dce9fef10b"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="cd074687-b670-43db-a566-04766867486a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="828ed069-410d-45a8-acbb-0e9e4ac78d86"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
