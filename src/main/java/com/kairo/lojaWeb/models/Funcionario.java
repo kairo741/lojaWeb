@@ -1,11 +1,17 @@
 package com.kairo.lojaWeb.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Funcionario {
 

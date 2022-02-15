@@ -15,6 +15,51 @@
 
     <!--    &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
     <!--    <link href="/css/style.css" rel="stylesheet"/>-->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+        let paymentsJson = "[[${payments}]]";
+        let numberOfClientes = [[${clientes}]];
+        let numberOfFuncionarios = [[${funcionarios}]];
+        let payments = JSON.parse(paymentsJson.replace(/&quot;/g, '"'))
+
+        google.charts.load('current', {'packages': ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            let data1 = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Cartão de Crédito', payments.creditCardAmount],
+                ['Cartão de Débito', payments.debitCardAmount],
+                ['Boleto', payments.ticketAmount],
+                ['Transferência', payments.bankTransferAmount],
+            ]);
+
+            let data2 = google.visualization.arrayToDataTable([
+                ['Task', 'Hours per Day'],
+                ['Clientes', numberOfClientes],
+                ['Funcionários', numberOfFuncionarios],
+            ]);
+
+
+            let options1 = {
+                title: 'Forma de pagamento usadas'
+            };
+
+            let options2 = {
+                title: 'Forma de pagamento usadas',
+                is3D: true,
+            };
+
+            let chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            let chart2 = new google.visualization.PieChart(document.getElementById('piechart2'));
+
+            chart.draw(data1, options1);
+            chart2.draw(data2, options2);
+        }
+    </script>
 </head>
 <body>
 <section class="layout-content" layout:fragment="corpo">
@@ -30,49 +75,37 @@
         </div>
     </nav>
 
-    <div class="container">
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+    <!--    <div class="container">-->
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-            <!-- 404 Error Text -->
-            <div class="text-center">
-                <div class="error mx-auto" data-text="404">404</div>
-                <p class="lead text-gray-800 mb-5">Page Not Found</p>
-                <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                <a href="/">&larr; Voltar para Dashboard</a>
+        <!-- 404 Error Text -->
+        <!--            <div class="text-center">-->
+        <!--                <div class="error mx-auto" data-text="404">404</div>-->
+        <!--                <p class="lead text-gray-800 mb-5">Page Not Found</p>-->
+        <!--                <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>-->
+        <!--                <a href="/">&larr; Voltar para Dashboard</a>-->
+        <!--            </div>-->
+        <div style="display: flex; align-items: center; flex-direction: row; justify-content: center;">
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <div id="piechart" style="width: 700px; height: 500px;"></div>
+                <a href="/reportCompra" target="_blank" class="btn btn-sm btn-success" role="button">
+                    Relatório de compras completo (.PDF)
+                </a>
             </div>
-
+            <div style="display: flex; flex-direction: column; align-items: flex-start;">
+                <div id="piechart2" style="width: 700px; height: 500px;"></div>
+                <a href="/reportUser" target="_blank" class="btn btn-sm btn-success" role="button">
+                    Relatório de usuários completo (.PDF)
+                </a>
+            </div>
         </div>
+
+
     </div>
+    <!--    </div>-->
 
 </section>
 
-<!--</div>-->
-<!--<footer class="layout-footer">-->
-<!--    <div class="container">-->
-<!--        <span class="footer-copy">&copy; 2018 MBallem. Todos os direitos reservados.</span>-->
-<!--    </div>-->
-<!--</footer>-->
-
-<!--&lt;!&ndash; Bootstrap core JavaScript-->
-<!--================================================== &ndash;&gt;-->
-<!--&lt;!&ndash; Placed at the end of the document so the pages load faster &ndash;&gt;-->
-<!--<script src="/webjars/jquery/jquery.min.js"></script>-->
-<!--<script src="/webjars/jquery-mask-plugin/dist/jquery.mask.min.js"></script>-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>-->
-<!--<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>-->
-<!--<script type="text/javascript">-->
-
-<!--    $(function () {-->
-<!--        $('[data-toggle="popover"]').popover();-->
-<!--    });-->
-
-<!--    $(document).ready(function () {-->
-<!--        $(".navbar-toggle").click(function () {-->
-<!--            $(".sidebar").toggleClass("sidebar-open");-->
-<!--        })-->
-<!--    });-->
-
-<!--</script>-->
 </body>
 </html>
